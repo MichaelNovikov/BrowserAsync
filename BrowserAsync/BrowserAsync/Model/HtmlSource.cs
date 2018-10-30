@@ -15,13 +15,17 @@ namespace BrowserAsync
         {
             var htmlSource = new HtmlWebViewSource();
             string html = "";
-            string url = @"https://";
+            string url = @"";
+
+            if(!(urlStr.Contains("https://") || urlStr.Contains("http://")))
+            {
+                url = "https://";
+            }
             url += urlStr;
 
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                request.AutomaticDecompression = DecompressionMethods.GZip;
 
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 using (Stream stream = response.GetResponseStream())

@@ -12,12 +12,12 @@ namespace BrowserAsync
 {
     public partial class MainPage : ContentPage
     {
-        HtmlSource htmlSource;
+        HtmlSource _htmlSource;
 
         public MainPage()
         {
             InitializeComponent();
-            htmlSource = new HtmlSource();
+            _htmlSource = new HtmlSource();
             btnGo.Clicked += BtnGo_Click;
         }
 
@@ -26,7 +26,7 @@ namespace BrowserAsync
             Spinner.IsRunning = true;
 
             var urlTxt = txtEntry.Text;
-            var result = await htmlSource.GetHtmlAsync(urlTxt);
+            var result = await _htmlSource.GetHtmlAsync(urlTxt);
 
             Browser.Source = result;
             Spinner.IsRunning = false;
