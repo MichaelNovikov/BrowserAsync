@@ -13,23 +13,39 @@ namespace BrowserAsync
     public partial class MainPage : ContentPage
     {
         HtmlSource _htmlSource;
+        CancellationTokenSource cts = new CancellationTokenSource();
 
         public MainPage()
         {
             InitializeComponent();
             _htmlSource = new HtmlSource();
             btnGo.Clicked += BtnGo_Click;
+            btnC.Clicked += BtnGo_C;
         }
 
         private async void BtnGo_Click(object sender, EventArgs e)
         {
+            HtmlWebViewSource result = new HtmlWebViewSource();
             Spinner.IsRunning = true;
 
             var urlTxt = txtEntry.Text;
-            var result = await _htmlSource.GetHtmlAsync(urlTxt);
+
+            try
+            {
+                 result = await _htmlSource.GetHtmlAsync(urlTxt, cts);
+            }
+            catch(OperationCanceledException ex)
+            {
+                result.Html = ex.Message;
+            }
 
             Browser.Source = result;
             Spinner.IsRunning = false;
-        } 
+        }
+
+        private void BtnGo_C(object sender, EventArgs e)
+        {
+            cts.Cancel();
+        }
     }
 }

@@ -44,9 +44,9 @@ namespace BrowserAsync
             return htmlSource;
         }
 
-        public async Task<HtmlWebViewSource> GetHtmlAsync(string urlStr)
+        public async Task<HtmlWebViewSource> GetHtmlAsync(string urlStr, CancellationTokenSource cts)
         {
-           return await Task.Run(() => GetHtml(urlStr));
+            return await Task.Run(() => GetHtml(urlStr), cts.Token);
         }
     }
 }

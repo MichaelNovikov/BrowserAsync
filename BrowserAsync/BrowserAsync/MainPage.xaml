@@ -8,7 +8,8 @@
         <!-- Place new controls here -->
         <StackLayout Orientation="Horizontal">
             <Entry x:Name="txtEntry"
-                   WidthRequest="250"
+                   WidthRequest="190"
+                   HorizontalOptions="End"
                    Placeholder="Please enter url" />
 
             <ActivityIndicator x:Name="Spinner"
@@ -18,8 +19,15 @@
             </ActivityIndicator>
 
             <Button x:Name="btnGo"
-                    HorizontalOptions="EndAndExpand"
+                     WidthRequest="45"
+                    BackgroundColor="LightBlue"
+                    HorizontalOptions="End"
                     Text="Go" />
+            <Button x:Name="btnC"
+                    WidthRequest="45"
+                    BackgroundColor="Orange"
+                    HorizontalOptions="EndAndExpand"
+                    Text="C" />
         </StackLayout>
 
         <WebView x:Name="Browser" WidthRequest="1000" HeightRequest="1000"/>
